@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="hole_height">80dp</dimen>
+    <dimen name="hole_width">90dp</dimen>
+    <dimen name="number_of_marbles_text_size">20sp</dimen>
+</resources>
