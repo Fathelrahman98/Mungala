@@ -1,5 +1,6 @@
 package com.example.mungala;
 
+import android.content.Context;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -27,10 +28,7 @@ public class Hole {
     }
 
     public boolean isHoleTaken() {
-        if (numberOfMarbleBalls == 2 || numberOfMarbleBalls == 4) {
-            return true;
-        }
-        return false;
+        return (numberOfMarbleBalls == 2 || numberOfMarbleBalls == 4);
     }
 
     public boolean isHoleAvailabe() {
@@ -51,22 +49,25 @@ public class Hole {
     public void addMarbleBall() {
         numberOfMarbleBalls++;
         setImage();
-        //button.setText(""+numberOfMarbleBalls);
+    }
+
+    public int getNumberOfMarbleBalls() {
+        return numberOfMarbleBalls;
     }
 
     class HoleNotAvailableException extends Exception {
         public HoleNotAvailableException() {
-            super("hole can't be played! \n few number of marble balls");
+            super();
         }
     }
 
     class HoleNotClearableException extends Exception {
         public HoleNotClearableException() {
-            super("hole shouldn't be cleared! \n large number of marble balls");
+            super();
         }
     }
 
-    void setImage() {
+    private void setImage() {
         switch (numberOfMarbleBalls) {
             case 0:
                 button.setImageResource(R.drawable.hole);
@@ -224,5 +225,10 @@ public class Hole {
             default:
                 button.setImageResource(R.drawable.hole);
         }
+    }
+
+    public void setNumberOfMarbleBalls(int numberOfMarbleBalls) {
+        this.numberOfMarbleBalls = numberOfMarbleBalls;
+        setImage();
     }
 }

@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mungala">
 
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,15 +13,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SinglePlayerActivity"
-            android:screenOrientation="landscape"></activity>
-        <activity android:name=".LocalMultiplayerActivity" />
+        <activity android:name=".BluetoothMultiplayerGameSetupActivity"/>
+        <activity android:name=".SinglePlayerGameSetupActivity" />
         <activity
-            android:name=".MainActivity"
-            android:screenOrientation="landscape">
+            android:name=".BluetoothMultiplayerActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".ScanningActivity" />
+        <activity
+            android:name=".SinglePlayerActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".LocalMultiplayerActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

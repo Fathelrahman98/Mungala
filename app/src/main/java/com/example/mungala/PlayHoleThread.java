@@ -3,34 +3,24 @@ package com.example.mungala;
 import android.app.Activity;
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.widget.Toast;
 
-class PlayHoleThread implements Runnable {
+class PlayHoleThread extends SyncThread {
 
     private static final int MOVE_DELAY = 400;
     private static final int TAKE_DELAY = 400;
-    private static boolean running;
+
     private Hole hole;
     private int nextHoleIndex;
     private GameCoordinator gameCoordinator;
     private Activity activity;
-    private MediaPlayer moveMediaPlayer;
-    private MediaPlayer takeMediaPlayer;
+    MediaPlayer moveMediaPlayer;
+    MediaPlayer takeMediaPlayer;
 
-    public boolean isRunning() {
-        return running;
-    }
-
-    public void lock() {
-        running = true;
-    }
-
-    public void unlock() {
-        running = false;
-    }
 
     public PlayHoleThread(Activity activity, GameCoordinator gameCoordinator) {
-        unlock();
         this.gameCoordinator = gameCoordinator;
         this.activity = activity;
         moveMediaPlayer = MediaPlayer.create(activity,R.raw.nff_select_04);
@@ -49,6 +39,7 @@ class PlayHoleThread implements Runnable {
     public void run() {
         try {
 
+            // take marbel balls from the played hole and distribute them in the holes according to the rule of the game. with a delay between any two moves to make them recognizable by human eye.
             int marbleBalls = hole.playHole();
             while(marbleBalls > 0) {
                 moveMediaPlayer.start();
@@ -58,6 +49,7 @@ class PlayHoleThread implements Runnable {
                 Thread.sleep(MOVE_DELAY);
             }
 
+            // take marbel balls from the last holes and add them to the score of the player according to the roles of the game.
             gameCoordinator.direction = !gameCoordinator.direction;
             while (gameCoordinator.holes[nextHoleIndex].isHoleTaken() && !gameCoordinator.isHoleBelongsToCurrentPlayer(nextHoleIndex)) {
                 takeMediaPlayer.start();
@@ -73,18 +65,18 @@ class PlayHoleThread implements Runnable {
             }
             gameCoordinator.direction = !gameCoordinator.direction;
 
+            // switch the role according to the rules of the game. Finish the game if no player has a valid move.
             if (!gameCoordinator.switchPlayerRole()) {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         gameCoordinator.finishGame();
-                        moveMediaPlayer.release();
-                        takeMediaPlayer.release();
+
                     }
                 });
-            };
+            }
         } catch (Hole.HoleNotAvailableException e) {
-            final String message = e.getMessage();
+            final String message = activity.getResources().getString(R.string.few_marble_balls);
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -92,9 +84,13 @@ class PlayHoleThread implements Runnable {
                 }
             });
         } catch (NullPointerException e) {
-
+            Log.d(Constants.MY_TAG,e.getMessage());
         } catch (InterruptedException e) {
-
+            Log.d(Constants.MY_TAG,e.toString());
+            if (shouldStop()) {
+                Log.d(Constants.MY_TAG,"out playHoleThread");
+                return;
+            }
         }
         finally {
             unlock();

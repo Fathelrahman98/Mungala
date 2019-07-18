@@ -1,6 +1,53 @@
 <resources>
     <string name="app_name">Mungala</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="found_devices_title">found devices:</string>
+    <string name="paired_devices_title">paired devices:</string>
+    <string name="connection_message">connected</string>
+    <string name="connection_lost_message">connection lost</string>
+    <string name="connection_failed_message">connection failed</string>
+    <string name="device_visible_text">visible</string>
+    <string name="device_invisible_text">invisible</string>
+    <string name="device_scanning_text">scanning</string>
+    <string name="device_not_scanning_text">not scanning</string>
+    <string name="already_visible_message">your device is already visible</string>
+    <string name="bluetooth_not_allowed_message">please enable bluetooth!</string>
+    <string name="discoverability_not_allowed_message">please enable bluetooth discoverability!</string>
+    <string name="permission_not_allowed_message">please enable location permission!</string>
+    <string name="no_device_found">no device found!</string>
+    <string name="no_paired_devices">no paired devices</string>
+    <string name="single">  single player</string>
+    <string name="multiple">local multiplayer</string>
+    <string name="bluetooth">bluetooth multiplayer</string>
+    <string name="host">host</string>
+    <string name="bluetooth_connect">bluetooth connect</string>
+    <string name="scan">scan</string>
+    <string name="few_marble_balls">hole can\'t be played \n few number of marble balls</string>
+    <string name="center_hole_message">select either the left or the right button</string>
+    <string name="visible">visible</string>
+    <string name="invisible">invisible</string>
+    <string name="level_1">level 1</string>
+    <string name="level_2">level 2</string>
+    <string name="level_3">level 3</string>
+    <string name="level_4">level 4</string>
+    <string name="level_5">level 5</string>
+    <string name="hold_to_change">hold to change</string>
+    <string name="connect">connect</string>
+    <string name="hosting">hosting</string>
+    <string name="not_hosting">not connected</string>
+    <string name="connecting">trying to connect</string>
+    <string name="not_connecting">not connected</string>
+    <string name="v_easy">amateur</string>
+    <string name="easy">easy</string>
+    <string name="medium">medium</string>
+    <string name="hard">professional</string>
+    <string name="v_hard">crazy</string>
+    <string name="play_again">play again</string>
+    <string name="quit">quit</string>
+    <string name="player1wins">player 1 wins</string>
+    <string name="player2wins">player 2 wins</string>
+    <string name="draw">draw</string>
+    <string name="you_win">congratulations! you won</string>
+    <string name="you_lost">oops! you lost!</string>
+    <string name="ok_string">OK</string>
 </resources>

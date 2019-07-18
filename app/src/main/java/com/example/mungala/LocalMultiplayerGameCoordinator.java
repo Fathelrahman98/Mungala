@@ -7,8 +7,8 @@ import android.widget.ImageButton;
 
 public class LocalMultiplayerGameCoordinator extends GameCoordinator {
 
-    LocalMultiplayerGameCoordinator(Context context) {
-        super(context);
+    LocalMultiplayerGameCoordinator(Context context, GameFinishListiner gameFinishListiner) {
+        super(context, gameFinishListiner);
     }
 
     @Override
@@ -59,4 +59,14 @@ public class LocalMultiplayerGameCoordinator extends GameCoordinator {
         setPlayer2ButtonsClickable(false);
     }
 
+    @Override
+    int getFinishGameTextId() {
+        if (player1.getScore() > 25) {
+            return R.string.player1wins;
+        } else if (player2.getScore() > 25) {
+            return R.string.player2wins;
+        } else {
+            return R.string.draw;
+        }
+    }
 }

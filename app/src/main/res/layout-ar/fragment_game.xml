@@ -30,7 +30,7 @@
         android:adjustViewBounds="true"
         android:background="?android:attr/selectableItemBackground"
         android:scaleType="fitXY"
-        android:src="@drawable/hole"
+        android:src="@drawable/hole12"
         android:textSize="@dimen/number_of_marbles_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/button1"
         app:layout_constraintEnd_toStartOf="@+id/button3"
@@ -45,7 +45,7 @@
         android:adjustViewBounds="true"
         android:background="?android:attr/selectableItemBackground"
         android:scaleType="fitXY"
-        android:src="@drawable/hole"
+        android:src="@drawable/hole30"
         android:textSize="@dimen/number_of_marbles_text_size"
         app:layout_constraintBottom_toBottomOf="@+id/button2"
         app:layout_constraintEnd_toStartOf="@+id/button4"
@@ -196,7 +196,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button1"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+        app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
 
     <ImageButton
         android:id="@+id/button11"
@@ -207,7 +207,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/button10"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/button10"
-        app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
+        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -218,7 +218,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/button9"
-        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+        app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
 
     <ImageButton
         android:id="@+id/imageButton2"
@@ -229,7 +229,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageButton"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/imageButton"
-        app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
+        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"

@@ -1,21 +1,22 @@
 package com.example.mungala;
 
-import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class SinglePlayerGameCoordinator extends GameCoordinator {
+public class BluetoothMultiplayerGameCoordinator extends GameCoordinator {
 
-    Bot bot;
-    com.example.mungala.BoardFormat boardFormat;
+    BluetoothService bluetoothService;
+    private boolean hasFirstTurn;
+    public com.example.mungala.BoardFormat boardFormat;
 
-    SinglePlayerGameCoordinator(Context context, GameFinishListiner gameFinishListiner, int diff) {
-        super(context, gameFinishListiner);
-        bot = new CalculatingBot(this, 2 * diff);
+    BluetoothMultiplayerGameCoordinator(Context context, GameFinishListiner gameFinishListiner, BluetoothService bluetoothService, boolean hasFirstTurn) {
+        super(context,gameFinishListiner);
+        this.bluetoothService = bluetoothService;
+        this.hasFirstTurn = hasFirstTurn;
         boardFormat = new BoardFormat();
     }
-
 
     @Override
     void initiateHoles() {
@@ -52,6 +53,62 @@ public class SinglePlayerGameCoordinator extends GameCoordinator {
     }
 
     @Override
+    void disableActiveButtons() {
+        setPlayer2ButtonsClickable(false);
+    }
+
+    @Override
+    void initiateRole() {
+        if (hasFirstTurn) {
+            isPlayer1CurrentPlayer = false;
+            moveRoleToPlayer2();
+        } else {
+            isPlayer1CurrentPlayer = true;
+            moveRoleToPlayer1();
+        }
+    }
+
+    class BoardFormat implements com.example.mungala.BoardFormat {
+
+        @Override
+        public View getView(int x) {
+            if (x < 0 || x > 5) {
+                Log.d(Constants.MY_TAG,"invalid view");
+                return null;
+            }
+            if (x == 2 || x == 3) {
+                return buttons[x+8];
+            }
+            if (x < 2) {
+                return buttons[x];
+            }
+            return buttons[x-1];
+        }
+
+        @Override
+        public int getIndex(View v) {
+            switch (v.getId()) {
+                case R.id.button9:
+                    return 5;
+                case R.id.button8:
+                    return 4;
+                case R.id.imageButton2:
+                    return 3;
+                case R.id.imageButton:
+                    return 2;
+                case R.id.button6:
+                    return 1;
+                case R.id.button:
+                    return 0;
+                case R.id.button7:
+                    return 16;
+                default:
+                    return 15;
+            }
+        }
+    }
+
+    @Override
     int getFinishGameTextId() {
         if (player1.getScore() > 25) {
             return R.string.you_lost;
@@ -61,43 +118,4 @@ public class SinglePlayerGameCoordinator extends GameCoordinator {
             return R.string.draw;
         }
     }
-
-    @Override
-    void disableActiveButtons() {
-        setPlayer2ButtonsClickable(false);
-    }
-
-    public class BoardFormat implements com.example.mungala.BoardFormat {
-
-        @Override
-        public View getView(int x) {
-            if (x == 2) {
-                return buttons[11];
-            }
-            return buttons[x];
-        }
-
-        @Override
-        public int getIndex(View v) {
-            switch (v.getId()) {
-                case R.id.button9:
-                    return 9;
-                case R.id.button8:
-                    return 8;
-                case R.id.imageButton2:
-                    return 11;
-                case R.id.imageButton:
-                    return 7;
-                case R.id.button6:
-                    return 6;
-                case R.id.button:
-                    return 5;
-                case R.id.button7:
-                    return 7;
-                default:
-                    return 15;
-            }
-        }
-    }
 }
-

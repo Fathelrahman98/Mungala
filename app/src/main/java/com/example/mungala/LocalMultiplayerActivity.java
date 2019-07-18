@@ -3,7 +3,7 @@ package com.example.mungala;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class LocalMultiplayerActivity extends AppCompatActivity{
+public class LocalMultiplayerActivity extends GameActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
